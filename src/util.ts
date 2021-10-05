@@ -7,8 +7,7 @@ export function createCalendarGrid(numWeeks: number, numDays: number) {
         const row = [];
         for (let j = 0; j < numDays; j++) {
             row.push({
-                daysOfMonth: [],
-                holidayName: null
+                daysOfMonth: []
             });
         }
         rows.push(row);
@@ -16,20 +15,21 @@ export function createCalendarGrid(numWeeks: number, numDays: number) {
     return rows;
 }
 
-export function buildGridForMonth(year: number, month: number) {
-    const rowCount = 6;
-    const cellCount = 7;
-    const grid = createCalendarGrid(rowCount, cellCount);
-
-    let startWeekday = new Date(year, month - 1, 1).getDay();
-
-    const daysInMonth = 32 - new Date(year, month - 1, 32).getDate();
-
-    for (var i = 0; i < rowCount * cellCount; i++) {
-        const rowIndex = i % rowCount;;
-        const cellIndex = i % cellCount;;
-        const cell = grid[rowIndex][cellIndex];
-        cell.daysOfMonth.push(i);
+export function buildGridForMonth(yearNumber: number, monthNumber: number) {
+    const numWeeks = 6;
+    const numDaysPerWeek = 7;
+    const grid = createCalendarGrid(numWeeks, numDaysPerWeek);
+    //the index of the weekday (0-6)
+    let startWeekdayIndex = new Date(yearNumber, monthNumber - 1, 1).getDay();
+    debugger;
+    let dayIndex = (startWeekdayIndex + 1) * -1;
+    for (let w = 0; w < numWeeks; w++) {
+        for (let d = 0; d < numDaysPerWeek; d++) {
+            dayIndex++;
+            if (dayIndex >= 0) {
+                grid[w][d].daysOfMonth.push(dayIndex + 1);
+            }
+        }
     }
 
     return grid;
