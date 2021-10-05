@@ -1,11 +1,10 @@
 <script lang="ts">
     import Calendar from "./Calendar.svelte";
-    import { buildGridForMonth, getMonthName, getLastMonth } from "./util";
+    import { getMonthName, getLastMonth } from "./util";
 
     export let year: number;
     export let month: number;
 
-    const grid = buildGridForMonth(year, month);
     const monthName = getMonthName(month - 1);
     const lastMonth = getLastMonth(month - 1, year);
 </script>
@@ -17,7 +16,7 @@
                 {lastMonth.monthName}
                 {lastMonth.year}
             </div>
-            <Calendar year={year} month={month - 1} isMini={true} />
+            <Calendar year={year} month={month - 1} weeks={6} isMini={true} />
         </div>
         <div class="notes">
             <div class="line" />
@@ -32,7 +31,7 @@
         </div>
     </div>
     <div class="calendar">
-        <Calendar year={year} month={month} />
+        <Calendar year={year} month={month} weeks={5} />
         <h1>{monthName} {year}</h1>
     </div>
 </div>

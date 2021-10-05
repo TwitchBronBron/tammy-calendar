@@ -3,9 +3,10 @@
 
     export let year: number;
     export let month: number;
+    export let weeks: number;
     export let isMini = false;
 
-    const grid = buildGridForMonth(year, month);
+    const grid = buildGridForMonth(year, month, weeks);
     const monthName = getMonthName(month - 1);
     function dow(fullDow: string) {
         if (isMini) {
@@ -32,7 +33,12 @@
         {#each grid as row}
             <tr>
                 {#each row as cell}
-                    <td>{cell.daysOfMonth[0]}</td>
+                    <td class="cell">
+                        <span class="day1">{cell.daysOfMonth[0] ?? ""}</span>
+                        {#if cell.daysOfMonth[1]}
+                            <span class="day2">{cell.daysOfMonth[1]}</span>
+                        {/if}
+                    </td>
                 {/each}
             </tr>
         {/each}
@@ -58,7 +64,6 @@
         background-color: lightgrey;
     }
 
-
     td {
         height: 3.5em;
         font-size: 2em;
@@ -66,17 +71,35 @@
         padding-top: 0.15em;
         overflow: hidden;
         white-space: nowrap;
+        position: relative;
     }
 
     .mini th {
         background-color: lightgrey;
-        height:.5em;
-        padding: .2em;
+        height: 0.5em;
+        padding: 0.2em;
     }
 
     .mini td {
         height: 2em;
         text-align: center;
         vertical-align: middle;
+        position: initial !important;
+    }
+    .day1 {
+        display: inline-block;
+        position: absolute;
+        left: 0.1em;
+        left: 0.1em;
+    }
+    .day2 {
+        display: inline-block;
+        position: absolute;
+        bottom: 0.1em;
+        right: 0.1em;
+    }
+    .mini .day1,
+    .mini .day2 {
+        position: initial;
     }
 </style>

@@ -15,19 +15,27 @@ export function createCalendarGrid(numWeeks: number, numDays: number) {
     return rows;
 }
 
-export function buildGridForMonth(yearNumber: number, monthNumber: number) {
-    const numWeeks = 6;
+export function buildGridForMonth(yearNumber: number, monthNumber: number, numWeeks: number) {
     const numDaysPerWeek = 7;
     const grid = createCalendarGrid(numWeeks, numDaysPerWeek);
     //the index of the weekday (0-6)
     let startWeekdayIndex = new Date(yearNumber, monthNumber - 1, 1).getDay();
-    debugger;
+    let lastDayOfMonthIndex = new Date(yearNumber, monthNumber, 0).getDate();
+    const lastWeekIndex = numWeeks - 1;
+
     let dayIndex = (startWeekdayIndex + 1) * -1;
     for (let w = 0; w < numWeeks; w++) {
+        //skip creating empty weeks
+        if (dayIndex >= lastDayOfMonthIndex) {
+            grid.splice(w, 1);
+            continue;
+        }
+        //force the final rows together if necessary
+        let weekIndex = w < lastWeekIndex ? w : lastWeekIndex;
         for (let d = 0; d < numDaysPerWeek; d++) {
             dayIndex++;
-            if (dayIndex >= 0) {
-                grid[w][d].daysOfMonth.push(dayIndex + 1);
+            if (dayIndex >= 0 && dayIndex < lastDayOfMonthIndex) {
+                grid[weekIndex][d].daysOfMonth.push(dayIndex + 1);
             }
         }
     }
