@@ -20,13 +20,13 @@
 <table class={isMini ? "mini" : "full"}>
     <thead>
         <tr>
-            <th><div>{dow("Sunday")}</div></th>
-            <th><div>{dow("Monday")}</div></th>
-            <th><div>{dow("Tuesday")}</div></th>
-            <th><div>{dow("Wednesday")}</div></th>
-            <th><div>{dow("Thursday")}</div></th>
-            <th><div>{dow("Friday")}</div></th>
-            <th><div>{dow("Saturday")}</div></th>
+            <th class="header"><div>{dow("Sunday")}</div></th>
+            <th class="header"><div>{dow("Monday")}</div></th>
+            <th class="header"><div>{dow("Tuesday")}</div></th>
+            <th class="header"><div>{dow("Wednesday")}</div></th>
+            <th class="header"><div>{dow("Thursday")}</div></th>
+            <th class="header"><div>{dow("Friday")}</div></th>
+            <th class="header"><div>{dow("Saturday")}</div></th>
         </tr>
     </thead>
     <tbody>
@@ -49,13 +49,16 @@
     table {
         table-layout: fixed;
         width: 100%;
+        height: 100%;
     }
     th,
     td {
         margin: 0;
         border: 3px solid black;
     }
-
+    .header {
+        display: table-cell;
+    }
     th {
         font-size: 1.6em;
         height: 2em;

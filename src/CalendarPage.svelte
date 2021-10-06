@@ -9,55 +9,86 @@
     const lastMonth = getLastMonth(month - 1, year);
 </script>
 
-<div class="container">
-    <div class="left-column">
-        <div class="last-month-calendar">
-            <div class="last-month-name">
-                {lastMonth.monthName}
-                {lastMonth.year}
+<div class="page">
+    <div class="top-section">
+        <div class="left-column">
+            <div class="header">{monthName} {year}</div>
+            <div class="left-border">
+                <div class="last-month-name">
+                    {lastMonth.monthName}
+                    {lastMonth.year}
+                </div>
+                <div class="last-month-calendar">
+                    <Calendar
+                        year={year}
+                        month={month - 1}
+                        weeks={6}
+                        isMini={true}
+                    />
+                </div>
+                <div class="notes">
+                    <hr />
+                    <hr />
+                    <hr />
+                    <hr />
+                    <hr />
+                    <hr />
+                    <hr />
+                    <hr />
+                    <hr />
+                    <hr />
+                    <hr />
+                    <hr />
+                </div>
             </div>
-            <Calendar year={year} month={month - 1} weeks={6} isMini={true} />
         </div>
-        <div class="notes">
-            <div class="line" />
-            <div class="line" />
-            <div class="line" />
-            <div class="line" />
-            <div class="line" />
-            <div class="line" />
-            <div class="line" />
-            <div class="line" />
-            <div class="line" />
+        <div class="calendar">
+            <Calendar year={year} month={month} weeks={5} />
         </div>
     </div>
-    <div class="calendar">
-        <Calendar year={year} month={month} weeks={5} />
-        <h1>{monthName} {year}</h1>
-    </div>
+    <h1>{monthName}</h1>
 </div>
 
 <style>
     h1 {
         text-align: center;
-        font-size: 1in;
+        font-size: 4em;
     }
-    .container {
+    .top-section {
+        display: flex;
+    }
+    .page {
         width: 14in;
         height: 8.5in;
-        border: 1px solid red;
         padding: 0.5in;
         display: flex;
+        flex-direction: column;
+        border: 1px solid red;
+        overflow: hidden;
+        box-sizing: border-box;
     }
     .left-column {
         display: inline-block;
-        border: 2px solid black;
+        height: 100%;
+        display: inline-flex;
+        flex-direction: column;
+    }
+    .left-border {
+        border: 0.2em solid black;
+        display: flex;
+        flex-direction: column;
         padding: 10px;
+        flex: 1;
     }
     .last-month-calendar {
         font-size: 0.3em;
         width: 200px;
     }
-    .line {
+    .header {
+        height: 1.4em;
+        background-color: transparent;
+    }
+    hr {
         width: 100%;
         height: 2px;
         background-color: black;
@@ -65,17 +96,20 @@
     }
     .notes {
         margin-top: 10px;
-        border: 2px solid black;
-        padding: 5px;
+        flex: 1;
+        height: 100%;
+        overflow: hidden;
     }
 
     .calendar {
-        margin-left: 20px;
+        margin-left: 10px;
+        height: 7in;
     }
 
     .last-month-name {
         width: 100%;
         text-align: center;
-        font-size: 3em;
+        font-size: 1em;
+        padding-bottom: 0.5em;
     }
 </style>

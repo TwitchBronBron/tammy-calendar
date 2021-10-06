@@ -31,7 +31,7 @@ export function buildGridForMonth(yearNumber: number, monthNumber: number, numWe
             continue;
         }
         //force the final rows together if necessary
-        let weekIndex = w < lastWeekIndex ? w : lastWeekIndex;
+        let weekIndex = w < 4 ? w : 4;
         for (let d = 0; d < numDaysPerWeek; d++) {
             dayIndex++;
             if (dayIndex >= 0 && dayIndex < lastDayOfMonthIndex) {
@@ -39,6 +39,7 @@ export function buildGridForMonth(yearNumber: number, monthNumber: number, numWe
             }
         }
     }
+    console.log(grid);
 
     return grid;
 }
