@@ -22,7 +22,7 @@
                     <Calendar
                         year={year}
                         month={month - 1}
-                        weeks={6}
+                        fitToFiveRows={false}
                         isMini={true}
                     />
                 </div>
@@ -43,7 +43,7 @@
             </div>
         </div>
         <div class="calendar">
-            <Calendar year={year} month={month} weeks={5} />
+            <Calendar year={year} month={month} fitToFiveRows={true} />
         </div>
     </div>
     <h1>{monthName}</h1>

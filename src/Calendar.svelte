@@ -3,10 +3,10 @@
 
     export let year: number;
     export let month: number;
-    export let weeks: number;
+    export let fitToFiveRows: boolean;
     export let isMini = false;
 
-    const grid = buildGridForMonth(year, month, weeks);
+    const grid = buildGridForMonth(year, month, fitToFiveRows);
     const monthName = getMonthName(month - 1);
     function dow(fullDow: string) {
         if (isMini) {
