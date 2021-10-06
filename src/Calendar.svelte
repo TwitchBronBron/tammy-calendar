@@ -1,10 +1,12 @@
 <script lang="ts">
     import { buildGridForMonth, getMonthName } from "./util";
+    import type { Holiday } from "./util";
 
     export let year: number;
     export let month: number;
     export let fitToFiveRows: boolean;
     export let isMini = false;
+    export let holidays = [] as Holiday[];
 
     const grid = buildGridForMonth(year, month, fitToFiveRows);
     const monthName = getMonthName(month - 1);
@@ -14,6 +16,17 @@
         } else {
             return fullDow;
         }
+    }
+
+    function getHolidayName(cell: { daysOfMonth: number[] }) {
+        return (
+            holidays.find(
+                (x) =>
+                    x.year === year &&
+                    x.month === month &&
+                    cell.daysOfMonth.includes(x.day - 1)
+            )?.name ?? ""
+        );
     }
 </script>
 
@@ -35,6 +48,7 @@
                 {#each row as cell}
                     <td class="cell">
                         <span class="day1">{cell.daysOfMonth[0] ?? ""}</span>
+                        <p class="holiday">{getHolidayName(cell)}</p>
                         {#if cell.daysOfMonth[1]}
                             <span class="day2">{cell.daysOfMonth[1]}</span>
                         {/if}
@@ -92,7 +106,7 @@
     .day1 {
         display: inline-block;
         position: absolute;
-        left: 0.1em;
+        top: 0.1em;
         left: 0.1em;
     }
     .day2 {
@@ -104,5 +118,17 @@
     .mini .day1,
     .mini .day2 {
         position: initial;
+    }
+
+    .cell {
+        text-align: center;
+        vertical-align: middle;
+        width: 100px;
+        height: 100px;
+    }
+    .cell .holiday {
+        font-size: 0.5em;
+        display: inline-block;
+        white-space: normal;
     }
 </style>

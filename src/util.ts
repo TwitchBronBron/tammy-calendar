@@ -1,3 +1,5 @@
+import Holidays from "date-holidays";
+
 /**
  * Returns an array of calendar week rows with day columns
  */
@@ -79,4 +81,31 @@ export function getLastMonth(currentMonthIndex: number, currentYear: number) {
         monthName: getMonthName(lastMonthIndex),
         year: lastMonthIndex > currentMonthIndex ? currentYear - 1 : currentYear
     }
+}
+
+export function getHolidays(year: number) {
+    const holidays = new Holidays("US", "pa").getHolidays(year);
+
+    return holidays.map(x => {
+        const date = new Date(x.start);
+        return {
+            name: x.name,
+            year: date.getFullYear(),
+            month: date.getMonth() + 1,
+            day: date.getDate() + 1
+        } as Holiday;
+    });
+}
+
+export interface Holiday {
+    name: string;
+    year: number;
+    /**
+     * The 1-based month number
+     */
+    month: number;
+    /**
+     * The 1-based day number
+     */
+    day: number;
 }

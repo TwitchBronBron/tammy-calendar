@@ -1,9 +1,10 @@
 <script lang="ts">
     import Calendar from "./Calendar.svelte";
-    import { getMonthName, getLastMonth } from "./util";
+    import { getMonthName, getLastMonth, Holiday } from "./util";
 
     export let year: number;
     export let month: number;
+    export let holidays: Holiday[];
 
     const monthName = getMonthName(month - 1);
     const lastMonth = getLastMonth(month - 1, year);
@@ -43,7 +44,7 @@
             </div>
         </div>
         <div class="calendar">
-            <Calendar year={year} month={month} fitToFiveRows={true} />
+            <Calendar year={year} month={month} fitToFiveRows={true} holidays={holidays} />
         </div>
     </div>
     <h1>{monthName}</h1>
@@ -66,6 +67,7 @@
         border: 1px solid red;
         overflow: hidden;
         box-sizing: border-box;
+        page-break-after: always;
     }
     .left-column {
         display: inline-block;
