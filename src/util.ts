@@ -126,6 +126,17 @@ export function getHolidays(year: number) {
         name: `St. Patrick's Day`,
         color: 'green'
     });
+
+    //add good friday
+    const easter = result.find(x => x.name.toLowerCase().startsWith('easter'));
+    result.push({
+        year: year,
+        month: easter.month,
+        day: easter.day - 2,
+        name: 'Good Friday',
+        color: 'default'
+    });
+
     return result;
 }
 
