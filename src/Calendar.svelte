@@ -70,6 +70,11 @@
         margin: 0;
         border: 3px solid black;
     }
+
+    .mini th,
+    .mini td {
+        border: 1px solid black;
+    }
     .header {
         display: table-cell;
     }
@@ -93,6 +98,7 @@
         background-color: lightgrey;
         height: 0.5em;
         padding: 0.2em;
+        padding-bottom: 0.4em;
     }
 
     .mini td {
