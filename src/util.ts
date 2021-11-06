@@ -83,19 +83,52 @@ export function getLastMonth(currentMonthIndex: number, currentYear: number) {
     }
 }
 
+//christmas and vday - red
+//july 4, labor day - blue
+// thanksgiving - yellowish orange
+// father's day
+
 export function getHolidays(year: number) {
     const holidays = new Holidays("US", "pa").getHolidays(year);
+    const keepers = new Map<string, { color?: string; name?: string }>([
+        [`New Year's Day`, { color: 'default' }],
+        [`Martin Luther King Jr. Day`, { color: 'default', name: `Martin Luther King's Birthday` }],
+        [`Valentine's Day`, { color: 'red' }],
+        [`Presidents' Day`, { color: 'default' }],
+        [`Easter Sunday`, { color: 'default', name: 'Easter' }],
+        [`Mother's Day`, { color: 'yellow' }],
+        [`Memorial Day`, { color: 'default' }],
+        [`Father's Day`, { color: 'default' }],
+        [`Independence Day`, { color: 'blue', name: '4th of July' }],
+        [`Labor Day`, { color: 'blue' }],
+        [`Columbus Day`, { color: 'default' }],
+        [`Veteran's Day`, { color: 'default' }],
+        [`Thanksgiving Day`, { color: 'orange', name: 'Thanksgiving' }],
+        [`Christmas Day`, { color: 'red', name: 'Christmas' }]
+    ]);
 
-    return holidays.map(x => {
-        const date = new Date(x.start);
-        return {
-            name: x.name,
-            year: date.getFullYear(),
-            month: date.getMonth() + 1,
-            day: date.getDate() + 1
-        } as Holiday;
+    const result = holidays.map((x) => {
+        if (keepers.has(x.name)) {
+            const holiday = x as unknown as Holiday;
+            const date = new Date(x.start);
+            holiday.color = keepers.get(x.name)?.color ?? 'default';
+            holiday.name = keepers.get(x.name)?.name ?? x.name;
+            holiday.year = date.getFullYear();
+            holiday.month = date.getMonth() + 1;
+            holiday.day = date.getDate();
+            return x;
+        }
+    }).filter(x => !!x) as unknown as Holiday[];
+    result.push({
+        year: year,
+        month: 3,
+        day: 17,
+        name: `St. Patrick's Day`,
+        color: 'green'
     });
+    return result;
 }
+
 
 export interface Holiday {
     name: string;
@@ -108,4 +141,8 @@ export interface Holiday {
      * The 1-based day number
      */
     day: number;
+    /**
+     * The class name of the color this column should be
+     */
+    color: string;
 }

@@ -64,7 +64,7 @@
         padding: 0.5in;
         display: flex;
         flex-direction: column;
-        border: 1px solid red;
+        /* border: 1px solid red; */
         overflow: hidden;
         box-sizing: border-box;
         page-break-after: always;

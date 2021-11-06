@@ -8,7 +8,7 @@
     export let isMini = false;
     export let holidays = [] as Holiday[];
 
-    const grid = buildGridForMonth(year, month, fitToFiveRows);
+    $: grid = buildGridForMonth(year, month, fitToFiveRows);
     const monthName = getMonthName(month - 1);
     function dow(fullDow: string) {
         if (isMini) {
@@ -18,14 +18,12 @@
         }
     }
 
-    function getHolidayName(cell: { daysOfMonth: number[] }) {
-        return (
-            holidays.find(
-                (x) =>
-                    x.year === year &&
-                    x.month === month &&
-                    cell.daysOfMonth.includes(x.day - 1)
-            )?.name ?? ""
+    function getHoliday(cell: { daysOfMonth: number[] }) {
+        return holidays.find(
+            (x) =>
+                x.year === year &&
+                x.month === month &&
+                cell.daysOfMonth.includes(x.day)
         );
     }
 </script>
@@ -46,9 +44,11 @@
         {#each grid as row}
             <tr>
                 {#each row as cell}
-                    <td class="cell">
+                    <td class="cell {getHoliday(cell)?.color ?? ''}">
                         <span class="day1">{cell.daysOfMonth[0] ?? ""}</span>
-                        <p class="holiday">{getHolidayName(cell)}</p>
+                        <p class="holiday">
+                            {getHoliday(cell)?.name ?? ""}
+                        </p>
                         {#if cell.daysOfMonth[1]}
                             <span class="day2">{cell.daysOfMonth[1]}</span>
                         {/if}
@@ -84,8 +84,6 @@
     td {
         height: 3.5em;
         font-size: 2em;
-        padding-left: 0.15em;
-        padding-top: 0.15em;
         overflow: hidden;
         white-space: nowrap;
         position: relative;
@@ -130,5 +128,25 @@
         font-size: 0.5em;
         display: inline-block;
         white-space: normal;
+        font-weight: bold;
+    }
+
+    .cell.default {
+        background-color: #ebd7e1;
+    }
+    .cell.red {
+        background-color: #ff4c4c;
+    }
+    .cell.blue {
+        background-color: #9dc3e6;
+    }
+    .cell.green {
+        background-color: #00b050;
+    }
+    .cell.yellow {
+        background-color: #f0f52d;
+    }
+    .cell.orange {
+        background-color: #ffc000;
     }
 </style>

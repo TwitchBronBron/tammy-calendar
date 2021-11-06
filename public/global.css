@@ -60,3 +60,11 @@ body {
     align-items: center;
     justify-content: center;
 }
+
+button {
+    cursor: pointer;
+}
+
+body {
+    -webkit-print-color-adjust: exact !important;
+}
