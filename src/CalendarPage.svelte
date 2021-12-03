@@ -79,11 +79,10 @@
         /* border: 1px solid red; */
         width: var(--page-width);
         height: var(--page-height);
-        padding: .7in;
-        padding-top: 1in;
+        padding: 0.7in;
+        padding-top: 1.3in;
         display: flex;
         flex-direction: column;
-        /* border: 1px solid red; */
         overflow: hidden;
         box-sizing: border-box;
         page-break-after: always;
