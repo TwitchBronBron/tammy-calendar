@@ -81,7 +81,7 @@
         display: table-cell;
     }
     th {
-        font-size: 1.5em;
+        font-size: 1.3em;
         height: 2em;
         text-align: center;
         vertical-align: middle;
