@@ -76,7 +76,7 @@
         display: flex;
     }
     .page {
-        border: 1px solid red;
+        /* border: 1px solid red; */
         width: var(--page-width);
         height: var(--page-height);
         padding: .7in;
