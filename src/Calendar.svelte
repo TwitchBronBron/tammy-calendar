@@ -100,6 +100,7 @@
         background-color: lightgrey;
         height: 0.5em;
         padding: 0.2em;
+        padding-top: .35em;
         padding-bottom: 0.4em;
     }
 
