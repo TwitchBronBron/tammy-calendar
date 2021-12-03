@@ -64,11 +64,13 @@
         table-layout: fixed;
         width: 100%;
         height: 100%;
+        border: var(--border);
     }
+
     th,
     td {
         margin: 0;
-        border: 3px solid black;
+        border: 1px solid black;
     }
 
     .mini th,
@@ -79,7 +81,7 @@
         display: table-cell;
     }
     th {
-        font-size: 1.6em;
+        font-size: 1.5em;
         height: 2em;
         text-align: center;
         vertical-align: middle;

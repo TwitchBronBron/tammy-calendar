@@ -1,6 +1,6 @@
 <script lang="ts">
-    import Calendar from "./Calendar.svelte";
-    import { getMonthName, getLastMonth, Holiday } from "./util";
+    import Calendar from './Calendar.svelte';
+    import { getMonthName, getLastMonth, Holiday } from './util';
 
     export let year: number;
     export let month: number;
@@ -40,17 +40,34 @@
                     <hr />
                     <hr />
                     <hr />
+                    <hr />
+                    <hr />
+                    <hr />
+                    <hr />
+                    <hr />
+                    <hr />
                 </div>
             </div>
         </div>
         <div class="calendar">
-            <Calendar year={year} month={month} fitToFiveRows={true} holidays={holidays} />
+            <Calendar
+                year={year}
+                month={month}
+                fitToFiveRows={true}
+                holidays={holidays}
+            />
         </div>
     </div>
     <h1>{monthName}</h1>
 </div>
 
 <style>
+    :root {
+        --page-width: 14in;
+        --page-height: calc(var(--page-width) / 1.64);
+        --calendar-height: calc(0.75 * var(--page-height));
+        --border: 0.2em solid black;
+    }
     h1 {
         text-align: center;
         font-size: 4em;
@@ -59,9 +76,10 @@
         display: flex;
     }
     .page {
-        width: 14in;
-        height: 8.5in;
-        padding: 0.5in;
+        border: 1px solid red;
+        width: var(--page-width);
+        height: var(--page-height);
+        padding: .7in;
         display: flex;
         flex-direction: column;
         /* border: 1px solid red; */
@@ -71,16 +89,18 @@
     }
     .left-column {
         display: inline-block;
-        height: 100%;
+        height: var(--calendar-height);
+        /* border: 3px solid green; */
         display: inline-flex;
         flex-direction: column;
     }
     .left-border {
-        border: 0.2em solid black;
+        border: var(--border);
         display: flex;
         flex-direction: column;
         padding: 10px;
         flex: 1;
+        overflow: hidden;
     }
     .last-month-calendar {
         font-size: 0.3em;
@@ -92,8 +112,9 @@
     }
     hr {
         width: 100%;
-        height: 2px;
-        background-color: black;
+        border: 0;
+        height: 0;
+        border-bottom: 0.05em solid black;
         margin-top: 0.3in;
     }
     .notes {
@@ -105,7 +126,9 @@
 
     .calendar {
         margin-left: 10px;
-        height: 7in;
+        height: var(--calendar-height);
+        /* border: 1px solid blue; */
+        overflow: hidden;
     }
 
     .last-month-name {
