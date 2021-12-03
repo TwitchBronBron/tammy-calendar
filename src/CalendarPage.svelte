@@ -104,7 +104,8 @@
     }
     .last-month-calendar {
         font-size: 0.3em;
-        width: 200px;
+        width: 250px;
+        height: 160px;
     }
     .header {
         height: 1.4em;
