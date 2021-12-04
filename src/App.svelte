@@ -62,9 +62,16 @@
     {:else}
         Generating PDF. Please wait...
     {/if}
+    <div class="version" style="">Updated VERSION_NUMBER</div>
 </div>
 
 <style>
+    .version {
+        position: absolute;
+        right: 0;
+        font-size: 12px;
+        padding-right: 10px
+    }
     button {
         cursor: pointer;
     }
