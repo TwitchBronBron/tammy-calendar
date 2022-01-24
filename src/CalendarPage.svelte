@@ -6,8 +6,8 @@
     export let month: number;
     export let holidays: Holiday[];
 
-    const monthName = getMonthName(month - 1);
-    const lastMonth = getLastMonth(month - 1, year);
+    $: monthName = getMonthName(month - 1);
+    $: lastMonth = getLastMonth(month - 1, year);
 </script>
 
 <div class="page">
